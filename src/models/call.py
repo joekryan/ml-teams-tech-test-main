@@ -1,12 +1,12 @@
 from pydantic import BaseModel, Field
 from datetime import datetime
-from typing import Optional, Literal
+from typing import Literal
 
 
 class CallAttributes(BaseModel):
     date: datetime
     risk_score: float = Field(alias="riskScore", ge=0.0, le=1.0)
-    number: Optional[str] = None
+    number: str
     green_list: bool = Field(alias="greenList")
     red_list: bool = Field(alias="redList")
 

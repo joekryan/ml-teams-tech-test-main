@@ -16,6 +16,7 @@ def test_risk_score_validation():
                 attributes=CallAttributes(
                     date="2020-10-12T07:20:50.52Z",
                     riskScore=score,
+                    number="+44123456789",
                     greenList=False,
                     redList=False,
                 ),
@@ -30,6 +31,7 @@ def test_risk_score_validation():
             attributes=CallAttributes(
                 date="2020-10-12T07:20:50.52Z",
                 riskScore=score,
+                number="+44123456789",
                 greenList=False,
                 redList=False,
             ),
@@ -44,6 +46,7 @@ def test_date_parsing():
         attributes=CallAttributes(
             date="2020-10-12T07:20:50.52Z",
             riskScore=0.5,
+            number="+44123456789",
             greenList=False,
             redList=False,
         ),
@@ -54,8 +57,21 @@ def test_date_parsing():
     assert call.attributes.date.day == 12
 
 
-def test_optional_number():
-    """Test that number field is optional"""
+def test_number_required():
+    """Test that number field is required"""
+    # Should raise error when number is missing
+    with pytest.raises(ValidationError):
+        Call(
+            type="call",
+            id="123",
+            attributes=CallAttributes(
+                date="2020-10-12T07:20:50.52Z",
+                riskScore=0.5,
+                greenList=False,
+                redList=False,
+            ),
+        )
+
     # Should work with number
     Call(
         type="call",
@@ -63,19 +79,7 @@ def test_optional_number():
         attributes=CallAttributes(
             date="2020-10-12T07:20:50.52Z",
             riskScore=0.5,
-            greenList=False,
-            redList=False,
             number="+44123456789",
-        ),
-    )
-
-    # Should also work without number
-    Call(
-        type="call",
-        id="123",
-        attributes=CallAttributes(
-            date="2020-10-12T07:20:50.52Z",
-            riskScore=0.5,
             greenList=False,
             redList=False,
         ),

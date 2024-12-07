@@ -1,9 +1,9 @@
 from typing import List
 import pandas as pd
-from src.models.call import Call
-from src.models.operator import Operator
-from src.services.operator_lookup import OperatorLookup
-from src.services.risk_calculator import RiskCalculator
+from .models.call import Call
+from .models.operator import Operator
+from .services.operator_lookup import OperatorLookup
+from .services.risk_calculator import RiskCalculator
 
 
 class CallAnalyser:
@@ -13,10 +13,9 @@ class CallAnalyser:
 
     def analyse_calls(self, calls: List[Call]) -> pd.DataFrame:
         """
-        analyse calls and return a dataframe of analysed call data
-        returns sorted by date
+        Analyse calls and return DataFrame of analysed call data.
+        Returns calls sorted by date with formatted date strings.
         """
-
         analysed_calls = [
             {
                 "id": call.id,
@@ -35,5 +34,5 @@ class CallAnalyser:
         )
 
     def write_csv_report(self, df: pd.DataFrame, output_path: str):
-        """Write analyzed calls to CSV file"""
+        """Write analysed calls DataFrame to CSV file"""
         df.to_csv(output_path, index=False)

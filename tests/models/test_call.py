@@ -16,7 +16,6 @@ def test_risk_score_validation():
                 attributes=CallAttributes(
                     date="2020-10-12T07:20:50.52Z",
                     riskScore=score,
-                    number="+44123456789",
                     greenList=False,
                     redList=False,
                 ),
@@ -31,7 +30,6 @@ def test_risk_score_validation():
             attributes=CallAttributes(
                 date="2020-10-12T07:20:50.52Z",
                 riskScore=score,
-                number="+44123456789",
                 greenList=False,
                 redList=False,
             ),
@@ -46,7 +44,6 @@ def test_date_parsing():
         attributes=CallAttributes(
             date="2020-10-12T07:20:50.52Z",
             riskScore=0.5,
-            number="+44123456789",
             greenList=False,
             redList=False,
         ),
@@ -57,23 +54,23 @@ def test_date_parsing():
     assert call.attributes.date.day == 12
 
 
-def test_number_required():
-    """Test that number field is required"""
-    # Should raise error when number is missing
-    with pytest.raises(ValidationError):
-        Call(
-            type="call",
-            id="123",
-            attributes=CallAttributes(
-                date="2020-10-12T07:20:50.52Z",
-                riskScore=0.5,
-                greenList=False,
-                redList=False,
-            ),
-        )
+def test_number_handling():
+    """Test number field handling"""
+    # Should default to "Withheld" when number is not provided
+    call_without_number = Call(
+        type="call",
+        id="123",
+        attributes=CallAttributes(
+            date="2020-10-12T07:20:50.52Z",
+            riskScore=0.5,
+            greenList=False,
+            redList=False,
+        ),
+    )
+    assert call_without_number.attributes.number == "Withheld"
 
-    # Should work with number
-    Call(
+    # Should accept explicit number
+    call_with_number = Call(
         type="call",
         id="123",
         attributes=CallAttributes(
@@ -84,3 +81,4 @@ def test_number_required():
             redList=False,
         ),
     )
+    assert call_with_number.attributes.number == "+44123456789"

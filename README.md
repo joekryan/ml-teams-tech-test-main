@@ -96,28 +96,28 @@ pytest
 ```
 
 ## Further Work
-1.	Enhanced Operator Matching Logic:
-Currently, the operator lookup logic assumes all phone numbers follow a +XX 2 digit country code format. In the future, I could:
-*Introduce support for multiple country codes.
-*Implement more robust number parsing to handle various international formats or malformed inputs gracefully.
-*Add configuration-driven operator ranges, making it easier to update or extend operator prefixes without code changes.
+1. Enhanced Operator Matching Logic:
+   Currently, the operator lookup logic assumes all phone numbers follow a +XX 2 digit country code format. In the future, I could:
+   * Introduce support for multiple country codes.
+   * Implement more robust number parsing to handle various international formats or malformed inputs gracefully.
+   * Add configuration-driven operator ranges, making it easier to update or extend operator prefixes without code changes.
 
-2.	More Resilient Input Validation:
-The JSON data loading process could be improved by:
-*Adding comprehensive validation for the structure and fields in the input JSON files.
-*Providing more informative error messages when data is missing or malformed.
+2. More Resilient Input Validation:
+   The JSON data loading process could be improved by:
+   * Adding comprehensive validation for the structure and fields in the input JSON files.
+   * Providing more informative error messages when data is missing or malformed.
 
-3.	Add Proper Logging and Monitoring
+3. Add Proper Logging and Monitoring
 
-4.	Scalability and Performance:
-As data volumes grow:
-*Consider optimising data loading and transformations to handle larger datasets efficiently.
-*Explore options for parallelising or caching operator lookups.
+4. Scalability and Performance:
+   As data volumes grow:
+   * Consider optimising data loading and transformations to handle larger datasets efficiently.
+   * Explore options for parallelising or caching operator lookups.
 
 5. Continuous Integration and Deployment:
-*Add CI/CD pipelines for automated testing, linting, and deployments.
-*Integrate coverage reports and static analysis tools for continual quality improvement.
-*Expand the test suite to include more edge cases and integration tests.
+   * Add CI/CD pipelines for automated testing, linting, and deployments.
+   * Integrate coverage reports and static analysis tools for continual quality improvement.
+   * Expand the test suite to include more edge cases and integration tests.
 
 ## Dependencies
 
